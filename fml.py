@@ -1,5 +1,5 @@
 # This program (FML) is not named after some fancy computer related acronym
-# fml stands for Fuck My Life
+# fml stands for Fuck My Lifehorizontals=[x.strip().split(" ") for x in f.readlines() if x.split[' '][0].strip()=='H']
 # because writing this program
 # Fucked My life
 # Not really, it was a great experience!
@@ -8,26 +8,15 @@ import time
 import copy
 import random
 with open('InputData/e_shiny_selfies.txt','r') as f: 
-    a=f.readlines()
-del a[0]
-# print(a[0])
-horizontals=[]
-verticals=[]
-start=time.time()
-for n in range(len(a)):
-    proxy=a[n].rstrip().split(" ")
-    if proxy[0]=="V":
-        proxy[0]=n
-
-        verticals.append(proxy)
-    else:
-        proxy[0]=n
-        horizontals.append(proxy)
+    horizontals=[x.strip().split(" ") for x in f.readlines()[1:] if x.split(' ')[0].strip()=='H']
+    f.seek(0)
+    verticals=[x.strip().split(" ") for x in f.readlines()[1:] if x.split(' ')[0].strip()=='V']
+horizontals.sort(key=len)
 verticals.sort(key=len)
+
 while len(verticals)>1:
     
     tags=list(set(verticals[-1][2:]).union(set(verticals[-2][2:])))
-    
     horizontals.append([(verticals[-1][0],verticals[-2][0]),len(tags)]+tags)
     print(len(verticals))
     # print(n)
@@ -42,7 +31,6 @@ horizontals.reverse()
 slideCount=0
 slides=[]
 print("HORIZONTALS")
-time.sleep(2)
 offset=1
 print(horizontals[5])
 
